@@ -18,20 +18,22 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="relative flex flex-col min-h-screen bg-black text-white overflow-x-hidden font-sans">
+    <div className="relative flex flex-col min-h-screen bg-black text-white font-sans overflow-x-hidden">
       {/* Header */}
       <Header />
 
-      {/* Accessibility Bar */}
+      {/* Accessibility tools */}
       <div className="fixed bottom-6 left-6 z-50">
         <AccessibilityBar />
       </div>
 
-      {/* Main Content */}
+      {/* Main content - natural smooth scroll */}
       <main
-        className="flex-1 scroll-smooth"
+        className="scroll-smooth"
         style={{
           scrollBehavior: "smooth",
+          overflowX: "hidden",
+          overflowY: "auto",
           WebkitOverflowScrolling: "touch",
         }}
       >
@@ -55,7 +57,8 @@ export default function App() {
           <FixFlex />
         </section>
 
-        <section id="why">
+        {/* ✅ Corrected IDs to match your Hero + Header */}
+        <section id="thrive">
           <Thrive />
         </section>
 
@@ -80,10 +83,8 @@ export default function App() {
         </section>
       </main>
 
-      {/* Floating AI Assistant */}
+      {/* Assistant & Footer */}
       <Assistant />
-
-      {/* Footer */}
       <Footer />
     </div>
   );

@@ -13,7 +13,7 @@ export default function Strengths() {
   return (
     <section
       id="strengths"
-      className="relative w-full bg-gradient-to-b from-[#0a0a0a] to-black px-6 md:px-20 py-28 flex flex-col items-center text-center overflow-visible"
+      className="relative min-h-screen flex flex-col justify-center items-center bg-gradient-to-b from-[#0a0a0a] to-black px-6 md:px-20 pt-28 pb-24 text-center overflow-visible"
     >
       {/* Header */}
       <motion.h2
@@ -21,13 +21,13 @@ export default function Strengths() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-bold text-yellow-400 mb-12"
+        className="text-4xl md:text-5xl font-bold text-yellow-400 mb-14"
       >
         Strengths &amp; Leadership
       </motion.h2>
 
       {/* Strengths Grid */}
-      <div className="grid gap-6 md:gap-8 max-w-4xl w-full">
+      <div className="grid gap-6 md:gap-8 max-w-4xl w-full relative z-10">
         {strengths.map((point, index) => (
           <motion.div
             key={index}
@@ -44,8 +44,8 @@ export default function Strengths() {
         ))}
       </div>
 
-      {/* Accent glow for premium touch */}
-      <div className="pointer-events-none absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-400/10 blur-[140px] rounded-full" />
+      {/* Ambient Glow */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-3xl pointer-events-none" />
     </section>
   );
 }

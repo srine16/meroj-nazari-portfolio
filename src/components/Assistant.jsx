@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const SAMPLE_ANSWERS = {
   strengths:
@@ -11,22 +11,41 @@ const SAMPLE_ANSWERS = {
 
 export default function Assistant() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    {
-      from: "bot",
-      text: "Hi, I’m Meroj’s AI assistant. How can I assist you today?",
-    },
-  ]);
+  const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const chatEndRef = useRef(null);
+
+  // 🔹 Initialize only once when the assistant first mounts
+  useEffect(() => {
+    setMessages([
+      {
+        from: "bot",
+        text: "Hi, I’m Meroj’s AI assistant. How can I assist you today?",
+      },
+    ]);
+  }, []);
+
+  // 🔹 Auto-scroll to bottom when new message arrives
+  useEffect(() => {
+    if (chatEndRef.current) {
+      chatEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   const handleSend = () => {
     if (!input.trim()) return;
+
     const userMsg = { from: "user", text: input.trim() };
-    let reply = "I can tell you about his strengths, goals, and leadership style.";
     const lower = input.toLowerCase();
+    let reply =
+      "I can tell you about Meroj’s strengths, goals, and leadership philosophy.";
+
     if (lower.includes("strength")) reply = SAMPLE_ANSWERS.strengths;
-    if (lower.includes("goal")) reply = SAMPLE_ANSWERS.goals;
-    if (lower.includes("why")) reply = SAMPLE_ANSWERS.why;
+    else if (lower.includes("goal")) reply = SAMPLE_ANSWERS.goals;
+    else if (lower.includes("why") || lower.includes("motivat"))
+      reply = SAMPLE_ANSWERS.why;
+    else if (lower.includes("hi") || lower.includes("hello"))
+      reply = "Hello! You can ask me about Meroj’s career or leadership.";
 
     setMessages((prev) => [...prev, userMsg, { from: "bot", text: reply }]);
     setInput("");
@@ -34,18 +53,22 @@ export default function Assistant() {
 
   return (
     <>
+      {/* Toggle button */}
       <button
         onClick={() => setOpen((p) => !p)}
         className="fixed bottom-6 right-6 bg-yellow-400 text-black font-semibold px-5 py-3 rounded-full shadow-lg hover:bg-yellow-300 transition z-50"
       >
-        {open ? "Close assistant" : "AI Assistant"}
+        {open ? "Close Assistant" : "AI Assistant"}
       </button>
+
+      {/* Chat window */}
       {open && (
         <div className="fixed bottom-20 right-6 w-80 bg-black/95 border border-yellow-400/40 rounded-xl p-4 flex flex-col gap-3 z-50">
           <h3 className="text-yellow-400 font-bold text-lg">
             Meroj AI Assistant
           </h3>
-          <div className="h-48 overflow-y-auto flex flex-col gap-2 text-sm">
+
+          <div className="h-52 overflow-y-auto flex flex-col gap-2 text-sm">
             {messages.map((m, idx) => (
               <div
                 key={idx}
@@ -58,7 +81,9 @@ export default function Assistant() {
                 {m.text}
               </div>
             ))}
+            <div ref={chatEndRef} />
           </div>
+
           <div className="flex gap-2">
             <input
               value={input}

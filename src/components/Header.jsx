@@ -10,7 +10,7 @@ export default function Header() {
     { id: "knownfor", label: "Known For" },
     { id: "peak-performance", label: "Peak Performance" },
     { id: "fixflex", label: "Fix & Flex" },
-    { id: "why", label: "Thrive" },
+    { id: "thrive", label: "Thrive" }, // ✅ fixed: was "why"
     { id: "career", label: "Career" },
     { id: "education", label: "Education" },
     { id: "contact", label: "Contact" },
@@ -26,7 +26,7 @@ export default function Header() {
             Meroj Nazari
           </span>
           <span className="text-[0.7rem] text-neutral-400">
-            Store Manager · M&S
+            Store Manager · M&amp;S
           </span>
         </div>
 
