@@ -2,6 +2,14 @@ import React from "react";
 import { motion } from "framer-motion";
 
 export default function Hero() {
+  // helper function for smooth scrolling
+  const smoothScroll = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section
       id="home"
@@ -44,29 +52,26 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9, duration: 1 }}
       >
-        {/* ✅ Corrected link to Strengths section */}
-        <a
-          href="#strengths"
+        <button
+          onClick={() => smoothScroll("strengths")}
           className="bg-yellow-400 text-black px-8 py-3 rounded-full font-semibold shadow-[0_0_25px_rgba(250,204,21,0.4)] hover:scale-[1.05] hover:shadow-[0_0_35px_rgba(250,204,21,0.55)] transition-all duration-300"
         >
           View Strengths
-        </a>
+        </button>
 
-        {/* ✅ Corrected link to Experience (Career Goals) */}
-        <a
-          href="#experience"
+        <button
+          onClick={() => smoothScroll("career")}
           className="border border-yellow-400 text-yellow-400 px-8 py-3 rounded-full font-semibold hover:bg-yellow-400 hover:text-black hover:shadow-[0_0_25px_rgba(250,204,21,0.45)] transition-all duration-300"
         >
           Career Goals
-        </a>
+        </button>
 
-        {/* ✅ Contact Link — smooth scroll or jump to Contact section */}
-        <a
-          href="#contact"
+        <button
+          onClick={() => smoothScroll("contact")}
           className="text-sm text-neutral-400 hover:text-yellow-300 tracking-wide transition-colors duration-200"
         >
           Contact Meroj →
-        </a>
+        </button>
       </motion.div>
 
       {/* Subtle Glow Layer */}
