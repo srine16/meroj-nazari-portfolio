@@ -13,7 +13,7 @@ export default function Strengths() {
   return (
     <section
       id="strengths"
-      className="min-h-[auto] h-auto flex flex-col justify-center items-center bg-gradient-to-b from-[#0a0a0a] to-black px-6 md:px-20 pt-28 pb-24 text-center overflow-visible"
+      className="relative w-full bg-gradient-to-b from-[#0a0a0a] to-black px-6 md:px-20 py-28 flex flex-col items-center text-center overflow-visible"
     >
       {/* Header */}
       <motion.h2
@@ -21,7 +21,7 @@ export default function Strengths() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-bold text-yellow-400 mb-10 drop-shadow-[0_0_25px_rgba(250,204,21,0.25)]"
+        className="text-4xl md:text-5xl font-bold text-yellow-400 mb-12"
       >
         Strengths &amp; Leadership
       </motion.h2>
@@ -31,9 +31,9 @@ export default function Strengths() {
         {strengths.map((point, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.15, duration: 0.6, ease: 'easeOut' }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
             viewport={{ once: true }}
             className="bg-neutral-900/60 border border-neutral-800 rounded-2xl px-6 py-5 text-left hover:border-yellow-400/40 transition duration-300 shadow-[0_0_25px_rgba(250,204,21,0.05)]"
           >
@@ -43,6 +43,9 @@ export default function Strengths() {
           </motion.div>
         ))}
       </div>
+
+      {/* Accent glow for premium touch */}
+      <div className="pointer-events-none absolute -bottom-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-yellow-400/10 blur-[140px] rounded-full" />
     </section>
   );
 }

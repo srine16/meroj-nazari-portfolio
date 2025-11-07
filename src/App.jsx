@@ -31,9 +31,8 @@ export default function App() {
       <main
         className="flex-1 scroll-smooth"
         style={{
-          overflowY: "visible", // ✅ allow normal browser scrolling
-          overflowX: "hidden",
           scrollBehavior: "smooth",
+          WebkitOverflowScrolling: "touch",
         }}
       >
         <section id="home">
