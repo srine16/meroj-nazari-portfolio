@@ -1,21 +1,32 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
   const links = [
-    { id: "home", label: "Home" },
-    { id: "strengths", label: "Strengths" },
-    { id: "core-competencies", label: "Core Competencies" },
-    { id: "knownfor", label: "Known For" },
-    { id: "peak-performance", label: "Peak Performance" },
-    { id: "fixflex", label: "Fix & Flex" },
-    { id: "thrive", label: "Thrive" }, // ✅ fixed: was "why"
-    { id: "career", label: "Career" },
-    { id: "education", label: "Education" },
-    { id: "contact", label: "Contact" },
-    { id: "quote", label: "Quote" },
+    { to: "/", label: "Home" },
+    { to: "/strengths", label: "Strengths" },
+    { to: "/core-competencies", label: "Core Competencies" },
+    { to: "/known-for", label: "Known For" },
+    { to: "/peak-performance", label: "Peak Performance" },
+    { to: "/fix-flex", label: "Fix & Flex" },
+    { to: "/thrive", label: "Thrive" },
+    { to: "/career", label: "Career" },
+    { to: "/education", label: "Education" },
+    { to: "/contact", label: "Contact" },
+    { to: "/quote", label: "Quote" },
   ];
+
+  const desktopClass = ({ isActive }) =>
+    `transition-colors hover:text-yellow-400 ${
+      isActive ? "text-yellow-400" : ""
+    }`;
+
+  const mobileClass = ({ isActive }) =>
+    `transition-colors hover:text-yellow-400 ${
+      isActive ? "text-yellow-400" : ""
+    }`;
 
   return (
     <header className="fixed top-0 left-0 w-full bg-black/95 backdrop-blur border-b border-neutral-800 z-50">
@@ -34,13 +45,10 @@ export default function Header() {
         <nav className="hidden lg:flex flex-grow justify-center">
           <ul className="flex gap-7 text-sm font-medium tracking-wide">
             {links.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="hover:text-yellow-400 transition-colors"
-                >
+              <li key={link.to}>
+                <NavLink to={link.to} className={desktopClass}>
                   {link.label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>
@@ -61,14 +69,14 @@ export default function Header() {
         <div className="lg:hidden bg-black/95 border-t border-neutral-800">
           <ul className="flex flex-col items-center gap-3 py-4 text-sm">
             {links.map((link) => (
-              <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
                   onClick={() => setOpen(false)}
-                  className="hover:text-yellow-400 transition-colors"
+                  className={mobileClass}
                 >
                   {link.label}
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>

@@ -1,8 +1,13 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+
 import Header from "./components/Header";
 import AccessibilityBar from "./components/AccessibilityBar";
 import Assistant from "./components/Assistant.jsx";
+import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop"; // ✅ added
 
+// pages
 import Hero from "./pages/Hero";
 import Strengths from "./pages/Strengths";
 import KnownFor from "./pages/KnownFor";
@@ -14,12 +19,10 @@ import CoreCompetencies from "./pages/CoreCompetencies";
 import Education from "./pages/Education";
 import Contact from "./pages/Contact";
 import Quote from "./pages/Quote";
-import Footer from "./components/Footer";
 
 export default function App() {
   return (
     <div className="relative flex flex-col min-h-screen bg-black text-white font-sans overflow-x-hidden">
-      {/* Header */}
       <Header />
 
       {/* Accessibility tools */}
@@ -27,63 +30,24 @@ export default function App() {
         <AccessibilityBar />
       </div>
 
-      {/* Main content - natural smooth scroll */}
-      <main
-        className="scroll-smooth"
-        style={{
-          scrollBehavior: "smooth",
-          overflowX: "hidden",
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
-        }}
-      >
-        <section id="home">
-          <Hero />
-        </section>
-
-        <section id="strengths">
-          <Strengths />
-        </section>
-
-        <section id="knownfor">
-          <KnownFor />
-        </section>
-
-        <section id="peak-performance">
-          <PeakPerformance />
-        </section>
-
-        <section id="fixflex">
-          <FixFlex />
-        </section>
-
-        {/* ✅ Corrected IDs to match your Hero + Header */}
-        <section id="thrive">
-          <Thrive />
-        </section>
-
-        <section id="career">
-          <Experience />
-        </section>
-
-        <section id="core-competencies">
-          <CoreCompetencies />
-        </section>
-
-        <section id="education">
-          <Education />
-        </section>
-
-        <section id="contact">
-          <Contact />
-        </section>
-
-        <section id="quote">
-          <Quote />
-        </section>
+      {/* Main content */}
+      <main className="flex-1 overflow-x-hidden">
+        <ScrollToTop /> {/* ✅ added */}
+        <Routes>
+          <Route path="/" element={<Hero />} />
+          <Route path="/strengths" element={<Strengths />} />
+          <Route path="/known-for" element={<KnownFor />} />
+          <Route path="/peak-performance" element={<PeakPerformance />} />
+          <Route path="/fix-flex" element={<FixFlex />} />
+          <Route path="/thrive" element={<Thrive />} />
+          <Route path="/career" element={<Experience />} />
+          <Route path="/core-competencies" element={<CoreCompetencies />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/quote" element={<Quote />} />
+        </Routes>
       </main>
 
-      {/* Assistant & Footer */}
       <Assistant />
       <Footer />
     </div>
